@@ -1,10 +1,6 @@
-import Link from 'next/link';
-
 const sell = props => (
     <div>
-        <Link href="/">
-            <a>Home</a>
-        </Link>
+        sell
     </div>
 );
 
