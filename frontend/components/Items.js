@@ -34,7 +34,6 @@ class Items extends Component {
     render() {
         return (
             <Center>
-                <p>Items!</p>
                 <Query query={ALL_ITEMS_QUERY}>
                 {({ data, error, loading }) => {
                     if (loading) return <p>loading...</p>
@@ -50,3 +49,4 @@ class Items extends Component {
 }
 
 export default Items;
+export { ALL_ITEMS_QUERY };
