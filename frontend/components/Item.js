@@ -6,6 +6,7 @@ import ItemStyles from './styles/ItemStyles';
 import PriceTag from './styles/PriceTag';
 import { Query } from 'react-apollo';
 import FormatMoney from '../lib/formatMoney';
+import DeleteItem from './DeleteItem';
 
 export default class Item extends Component {
     static propTypes = {
@@ -39,10 +40,10 @@ export default class Item extends Component {
                             pathname: 'update',
                             query: { id: item.id },
                         }}>
-                        <a>Edit +pencil</a>
+                        <a>Edit ✏️</a>
                     </Link>
                     <button>Add To Cart</button>
-                    <button>Delete</button>
+                    <DeleteItem id={item.id}>Delete This Item</DeleteItem>
                 </div>
             </ItemStyles>
         )
