@@ -60,6 +60,11 @@ const Mutations = {
     });
     return user;
   },
+
+  signout(_, args, ctx, info) {
+    ctx.response.clearCookie('token');
+    return {message: 'GoodBaye!'};
+  },
 };
 
 module.exports = Mutations;
