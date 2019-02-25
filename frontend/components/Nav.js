@@ -2,11 +2,17 @@ import Link from 'next/link';
 import NavStyles from './styles/NavStyles';
 import User from './User';
 import Signout from './Signout';
+import styled from 'styled-components';
+
+const UserName = styled.div`
+  color: green;
+`;
 
 const Nav = () => (
     <User>
          {({ data: { me } }) => (
        <NavStyles>
+           <UserName> {me.name} </UserName>
         <Link href="/items">
             <a>Shop</a>
         </Link>
