@@ -18,9 +18,6 @@ const ALL_ITEMS_QUERY = gql`
             largeImage
         },
     },
-    {
-    options: { fetchPolicy: 'network-only' },
-  }
 `;
 
 const Center = styled.div`
