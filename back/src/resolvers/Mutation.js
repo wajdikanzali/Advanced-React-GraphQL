@@ -29,18 +29,18 @@ const Mutations = {
   async signup(parent, args, ctx, info) {
     args.email = args.email.toLowerCase();
     const password = await bcrypt.hash(args.password, 10);
-    const user = ctx.db.mutation.createUser({
+    const user = await ctx.db.mutation.createUser({
       data: {
         ...args,
         password,
         permissions : { set: ['USER'] }
       }
     }, info);
-    const token = jwt.sign({ userid: user.id }, process.env.APP_SECRET);
-    ctx.response.cookie('token', token), {
+    const token = jwt.sign({ userId: user.id }, process.env.APP_SECRET);
+    ctx.response.cookie('token', token, {
       httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24 * 365
-    };
+      maxAge: 1000 * 60 * 60 * 24 * 365,
+    });
     return user;
   },
 };
