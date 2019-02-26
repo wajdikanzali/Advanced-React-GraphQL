@@ -3,7 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Form from './styles/Form';
 import formatMoney from '../lib/formatMoney';
-import Eroor from './ErrorMessage';
+import Error from './ErrorMessage';
 import Router from 'next/router';
 
 const CREATE_ITEM_MUTATION = gql`
@@ -55,7 +55,7 @@ class CreateItem extends Component {
         const file = await res.json();
         this.setState({
             image: file.secure_url,
-            // largeImage: file.eager[0].secure_url,
+            largeImage: file.secure_url,
         });
     }
 
