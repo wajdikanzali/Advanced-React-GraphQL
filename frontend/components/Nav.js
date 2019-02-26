@@ -12,7 +12,7 @@ const Nav = () => (
     <User>
          {({ data: { me } }) => (
        <NavStyles>
-           <UserName> {me.name} </UserName>
+           <UserName> {me && me.name} </UserName>
         <Link href="/items">
             <a>Shop</a>
         </Link>
