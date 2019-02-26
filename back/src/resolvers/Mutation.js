@@ -6,8 +6,16 @@ const { sendEmailSMTP } = require('../mail');
 
 const Mutations = {
   async createItem(_, args, ctx, info) {
+    if(!ctx.request.userId){
+      throw new Error('You must logged in to do that!');
+    }
     const item = await ctx.db.mutation.createItem({
       data: {
+        user: {
+          connect: {
+            id: ctx.request.userId,
+          }
+        },
         ...args
       }
     }, info);
