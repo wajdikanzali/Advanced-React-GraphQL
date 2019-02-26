@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const { randomBytes } = require('crypto');
+const { sendEmailSMTP } = require('../mail');
 
 const Mutations = {
   async createItem(_, args, ctx, info) {
@@ -69,7 +70,7 @@ const Mutations = {
   },
 
   async requestReset(_, args, ctx, info){
-    const user = ctx.db.query.user({ where: { email: args.email }});
+    const user = await ctx.db.query.user({ where: { email: args.email }});
     if(!user) {
       throw new Error(`No such user found for email ${email}`);
     }
@@ -80,7 +81,8 @@ const Mutations = {
       where: { email: args. email },
       data: { resetToken, resetTokenExpiry },
     });
-    console.log(res);
+    await sendEmailSMTP(user.email, resetToken);
+    console.info(`[smtp mailing] mail sent to ${user.email}`);
     return { message: 'Thanks!' };
   },
 
