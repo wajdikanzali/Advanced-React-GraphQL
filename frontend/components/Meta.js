@@ -6,6 +6,7 @@ const Meta = () => (
     <meta charSet="utf-8" />
     <link rel="shortcut icon" href="/static/adidas-logo.png" />
     <link rel="stylesheet" type="text/css" href="/static/nprogress.css" />
+    <link rel="stylesheet" href="/static/react-table.css"></link>
     <title>adidas | adidas TN</title>
   </Head>
 );
