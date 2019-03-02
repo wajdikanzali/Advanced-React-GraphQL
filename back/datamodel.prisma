@@ -1,10 +1,10 @@
-enum Permession {
+enum Permission {
   ADMIN
   USER
   ITEMCREATE
   ITEMUPDATE
   ITEMDELETE
-  PERMESSIONUPDATE
+  PERMISSIONUPDATE
 }
 
 type User {
@@ -14,7 +14,7 @@ type User {
   password: String!
   resetToken: String
   resetTokenExpiry: Float
-  permissions: [Permession]
+  permissions: [Permission]
 }
 
 type Item {
