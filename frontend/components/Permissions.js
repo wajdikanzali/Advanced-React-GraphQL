@@ -7,11 +7,17 @@ import Table from './styles/Table';
 import Form from './styles/Form';
 import UpdateButton from './styles/UpdateButton';
 import PropTypes from 'prop-types';
+import PaginationsUsers from './PaginationsUsers';
+import { perPage } from '../config';
 
 const Columns = styled.div`
   padding: 5px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-gap: 20px;
+`;
+
+const Center = styled.div`
+  text-align: center;
 `;
 
 const possiblePermissions = [
@@ -35,30 +41,39 @@ const UPDATE_PERMISSIONS_MUTATION = gql`
 `;
 
 const ALL_USERS_QUERY = gql`
-  query {
-    users {
+  query ALL_USERS_QUERY($skip: Int = 0, $first: Int = ${perPage}) {
+    users(first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       name
       email
       permissions
-    }
-  }
+    },
+  },
 `;
 
 const Permissions = (props) => (
-  <Query query={ALL_USERS_QUERY}>
-    {({ data, loading, error }) => {
-      if (loading) return <p>Loading...</p>
-      return (
-        <div>
-          <Error error={error} />
+  <Center>
+    <PaginationsUsers page={props.page} />
+    <Query
+      query={ALL_USERS_QUERY}
+      variables={{
+        skip: props.page * perPage - perPage,
+      }}
+    >
+      {({ data, loading, error }) => {
+        if (loading) return <p>Loading...</p>
+        if (error) return <Error error={error} />
+        return (
           <div>
-            <h2>Manage Permissions</h2>
-            {data.users.map(user => <UserPermissions user={user} key={user.id} />)}
-          </div>
-        </div>)
-    }}
-  </Query>
+            <div>
+              <h2>Manage Permissions</h2>
+              {data.users.map(user => <UserPermissions user={user} key={user.id} />)}
+            </div>
+          </div>)
+      }}
+    </Query>
+    <PaginationsUsers />
+  </Center>
 );
 
 class UserPermissions extends React.Component {

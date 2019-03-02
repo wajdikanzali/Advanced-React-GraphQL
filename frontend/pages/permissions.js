@@ -4,7 +4,7 @@ import Permissions from '../components/Permissions';
 const PermissionsPage = props => (
     <div>
         <PleaseSignIn>
-           <Permissions />
+           <Permissions page= { parseFloat(props.query.page) || 1 }/>
         </PleaseSignIn>
     </div>
 );
