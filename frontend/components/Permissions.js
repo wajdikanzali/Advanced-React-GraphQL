@@ -73,7 +73,7 @@ class UserPermissions extends React.Component {
   state = {
     permissions: this.props.user.permissions,
   };
-  handlePermissionChange = (e) => {
+  handlePermissionChange = (e, updatePermissions) => {
     const checkbox = e.target;
     let updatedPermissions = [...this.state.permissions];
     if (checkbox.checked) {
@@ -82,6 +82,7 @@ class UserPermissions extends React.Component {
       updatedPermissions = updatedPermissions.filter(permission => permission !== checkbox.value);
     }
     this.setState({ permissions: updatedPermissions });
+    updatePermissions();
   };
   render() {
     const { user } = this.props;
@@ -120,7 +121,9 @@ class UserPermissions extends React.Component {
                                 type="checkbox"
                                 checked={this.state.permissions.includes(permission)}
                                 value={permission}
-                                onChange={this.handlePermissionChange}
+                                onChange={(e) =>
+                                  this.handlePermissionChange(e, updatePermissions)
+                                }
                               />
                             </label>
                           </td>
