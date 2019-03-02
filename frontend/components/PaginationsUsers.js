@@ -45,7 +45,7 @@ const PaginationsUsers = props => (
             Page {props.page} of
             <span className="totalPages">{pages}</span>!
           </p>
-          <p>{count} Items Total</p>
+          <p>{count} Users Total</p>
           <Link
             prefetch
             href={{
