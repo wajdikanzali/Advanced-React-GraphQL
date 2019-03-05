@@ -170,7 +170,6 @@ const Mutations = {
       },
     });
     if (existingCartItem) {
-      console.log('This item is already in their cart');
       return ctx.db.mutation.updateCartItem(
         {
           where: { id: existingCartItem.id },
