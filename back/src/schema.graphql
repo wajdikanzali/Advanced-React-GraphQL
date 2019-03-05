@@ -31,5 +31,5 @@ type User {
   name: String!
   email: String!
   permissions: [Permission!]!
-  item: [CartItem!]!
+  cart: [CartItem!]!
 }
