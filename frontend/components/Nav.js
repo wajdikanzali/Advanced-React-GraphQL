@@ -5,6 +5,7 @@ import User from './User';
 import Signout from './Signout';
 import styled from 'styled-components';
 import { TOGGLE_CART_MUTATION } from './Cart';
+import CartCount from './CartCount';
 
 const UserName = styled.div`
   color: green;
@@ -39,7 +40,10 @@ const Nav = () => (
         )}
         <Mutation mutation={TOGGLE_CART_MUTATION}>
         {toggleCart => (
-            <button onClick={toggleCart}>My Cart</button>
+            <button onClick={toggleCart}>
+            My Cart
+             <CartCount count={me.cart.reduce((acc, totalQuantity) => acc + totalQuantity.quantity ,0)} />
+            </button>
         )}
         </Mutation>
     </NavStyles>
