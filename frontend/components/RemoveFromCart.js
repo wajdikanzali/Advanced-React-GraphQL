@@ -28,12 +28,26 @@ class RemoveFromCart extends React.Component {
     id: PropTypes.string.isRequired,
   };
 
+  update = (apolloCache, payload) => {
+      const data = apolloCache.readQuery({ query: CURRENT_USER_QUERY });
+      const cartItemId = payload.data.removeFromCart.id;
+      data.me.cart = data.me.cart.filter(cartItem => cartItem.id !== cartItemId);
+      apolloCache.writeQuery({ query: CURRENT_USER_QUERY, data})
+  }
+
   render() {
     return (
       <Mutation
         mutation={REMOVE_FROM_CART_MUTATION}
         variables={{ id: this.props.id }}
-        refetchQueries={[{query: CURRENT_USER_QUERY}]}
+        update={this.update}
+        optimisticResponse={{
+            __typename: 'Mutation',
+            removeFromCart: {
+                __typename: 'CartItem',
+                id: this.props.id,
+            },
+        }}
       >
         {(removeFromCart, { loading, error }) => (
           <BigButton
