@@ -21,6 +21,15 @@ const SEARCH_ITEMS_QUERY = gql`
     }
 `;
 
+const routeToItem = (item) =>	{
+    Router.push({
+        pathname: '/item',
+        query: {
+            id: item.id,
+        },
+    });
+}
+
 class AutoComplete extends Component {
     state = {
         items: [],
@@ -38,27 +47,49 @@ class AutoComplete extends Component {
         })
     }, 350);
     render() {
+        resetIdCounter();
         return (
             <SearchStyles>
-                <div>
+                <Downshift onChange={routeToItem} itemToString={item => (item === null ? '': item.title)}>
+                   {({ getInputProps, getItemProps, isOpen,
+                    inputValue, highlightedIndex}) => (
+                  <div>
                     <ApolloConsumer>
                         {client => (
-                            <input type='search' onChange={e => {
-                                e.persist();
-                                this.onChange(e, client);
-                              }} 
-                           />
+                            <input 
+                                {...getInputProps({
+                                    type: 'Search',
+                                    placeholder: 'Serach For An Item',
+                                    id: 'search',
+                                    className: this.state.loading ? 'loading': '',
+                                    onChange: e => {
+                                    e.persist();
+                                    this.onChange(e, client);
+                                  }, 
+                                })}
+                              />
                          )}
                     </ApolloConsumer>
-                    <DropDown>
-                        {this.state.items.map(item => 
-                          <DropDownItem key={item.id}>
-                            <img width='50' src={item.image} alt={item.title} />
-                            {item.title}
-                          </DropDownItem>
-                        )}
-                    </DropDown>
+                    { isOpen && (
+                        <DropDown>
+                            {this.state.items.map((item, index) => 
+                            <DropDownItem 
+                             {...getItemProps({ item })}
+                             key={item.id}
+                             highlighted={index === highlightedIndex}
+                              >
+                                <img width='50' src={item.image} alt={item.title} />
+                                {item.title}
+                            </DropDownItem>
+                            )}
+                            {!this.state.items.length && !this.state.loading && (
+                                <DropDownItem> Nothing Found {inputValue}</DropDownItem>
+                            )}
+                        </DropDown>
+                     )}
                 </div>
+                )} 
+             </Downshift>
             </SearchStyles>
         )
     }
