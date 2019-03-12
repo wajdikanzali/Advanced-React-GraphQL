@@ -11,6 +11,7 @@ import UpdateButton from './styles/UpdateButton';
 import CartItem from './CartItem';
 import CalcTotalPrice from '../lib/calcTotalPrice';
 import formatMoney from '../lib/formatMoney';
+import TakeMyMoney from './TakeMyMoney';
 
 const LOCAL_STATE_QUERY = gql`
     query {
@@ -52,7 +53,9 @@ const Cart = () => (
                 </ul>
                 <footer>
                     <p>{formatMoney(CalcTotalPrice(me.cart))}</p>
-                    <UpdateButton>Checkout</UpdateButton>
+                    <TakeMyMoney>
+                       <UpdateButton>Checkout</UpdateButton>
+                    </TakeMyMoney>
                 </footer>
             </CartStyles>
       );
