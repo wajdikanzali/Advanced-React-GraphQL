@@ -221,7 +221,7 @@ const Mutations = {
       cart {
         id
         quantity
-        item { title price id description image largeImage }
+        item { title price id description image }
       }}`
     );
     const amount = user.cart.reduce(
@@ -234,6 +234,31 @@ const Mutations = {
       currency: 'USD',
       source: args.token,
     });
+    const orderItems = user.cart.map(cartItem => {
+      const orderItem = {
+        ...cartItem.item,
+        quantity: cartItem.quantity,
+        user: { connect: { id: userId } },
+      };
+      delete orderItem.id;
+      return orderItem;
+    });
+
+    const order = await ctx.db.mutation.createOrder({
+      data: {
+        total: charge.amount,
+        charge: charge.id,
+        items: { create: orderItems },
+        user: { connect: { id: userId } },
+      },
+    });
+    const cartItemIds = user.cart.map(cartItem => cartItem.id);
+    await ctx.db.mutation.deleteManyCartItems({
+      where: {
+        id_in: cartItemIds,
+      },
+    });
+    return order;
   },
 };
 
