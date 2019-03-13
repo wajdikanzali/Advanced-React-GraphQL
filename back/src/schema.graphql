@@ -26,6 +26,7 @@ type Query {
     usersConnection(where: UserWhereInput): UserConnection!
     me: User
     users(orderBy: ItemOrderByInput, skip: Int, first: Int): [User]!
+    order(id: ID!): Order
 }
 
 type User {
