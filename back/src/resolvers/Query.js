@@ -37,7 +37,22 @@ const Query = {
       throw new Error('You cant see this bud');
     }
     return order;
-  }
+  },
+  async orders(_, args, ctx, info) {
+		console.log('TCL: orders -> info', info)
+    const { userId } = ctx.request;
+    if (!userId) {
+      throw new Error('you must be signed in!');
+    }
+    return ctx.db.query.orders(
+      {
+        where: {
+          user: { id: userId },
+        },
+      },
+      info
+    );
+  },
 };
    
 module.exports = Query;
