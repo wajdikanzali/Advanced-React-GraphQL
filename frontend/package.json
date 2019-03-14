@@ -1,12 +1,12 @@
 {
-  "name": "sick-fits-frontend",
+  "name": "adidas-frontend",
   "version": "1.0.0",
-  "description": "Sick Fits! An example React, GraphQL, Next and Apollo",
+  "description": "Adidas! An example React, GraphQL, Next and Apollo",
   "main": "index.js",
   "scripts": {
     "dev": "next -p 7777",
     "build": "next build",
-    "start": "next start -p 7777",
+    "start": "next start -p $PORT",
     "test": "NODE_ENV=test jest --watch",
     "heroku-postbuild": "next build"
   },
