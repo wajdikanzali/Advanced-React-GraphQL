@@ -35,7 +35,7 @@ export default class Item extends Component {
                 </Title>
                 <PriceTag>{FormatMoney(item.price)}</PriceTag>
                 <p>{item.description}</p>
-                <div>
+                <div className="buttonList">
                     <Link
                         href={{
                             pathname: 'update',
