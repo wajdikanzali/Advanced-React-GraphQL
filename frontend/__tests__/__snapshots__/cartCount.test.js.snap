@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CartCount/> matches the snapshot 1`] = `
+<CartCount__Dot>
+  11
+</CartCount__Dot>
+`;
+
+exports[`<CartCount/> updates via props 1`] = `
+<CartCount__Dot>
+  50
+</CartCount__Dot>
+`;
+
+exports[`<CartCount/> updates via props 2`] = `
+<CartCount__Dot>
+  10
+</CartCount__Dot>
+`;

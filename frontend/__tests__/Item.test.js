@@ -16,7 +16,7 @@ describe('<Item/>', () => {
     const wrapper = shallow(<ItemComponent item={fakeItem} />);
     const img = wrapper.find('img');
     expect(img.props().src).toBe(fakeItem.image);
-    expect(img.props().alt).toBe(fakeItem.title);
+    expect(img.props().alt).toBe(fakeItem.title); 
   });
 
   it('renders the pricetag and title', () => {
