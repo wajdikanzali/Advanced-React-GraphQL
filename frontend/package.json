@@ -7,7 +7,7 @@
     "dev": "next -p 7777",
     "build": "next build",
     "start": "next start",
-    "test": "NODE_ENV=test jest --watch",
+    "test": "cross-env NODE_ENV=test jest --watch",
     "test-win": "SET NODE_ENV=test&& jest --watch"
   },
   "author": "",
@@ -17,6 +17,7 @@
     "apollo-client": "^2.4.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-plugin-styled-components": "^1.7.1",
+    "cross-env": "^5.2.0",
     "date-fns": "^2.0.0-alpha.7",
     "downshift": "^2.2.3",
     "enzyme": "^3.6.0",

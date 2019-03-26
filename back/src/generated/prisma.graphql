@@ -1,5 +1,5 @@
-# source: https://adidas-production-dee6be0c3b.herokuapp.com/adidas-prod/prod
-# timestamp: Wed Mar 13 2019 23:22:51 GMT+0100 (Paris, Madrid)
+# source: https://us1.prisma.sh/wajdikanzali/just-for-test/dev
+# timestamp: Thu Mar 14 2019 14:51:58 GMT+0100 (Paris, Madrid)
 
 type AggregateCartItem {
   count: Int!
@@ -213,8 +213,9 @@ input CartItemUpdateManyMutationInput {
 input CartItemUpdateManyWithoutUserInput {
   create: [CartItemCreateWithoutUserInput!]
   connect: [CartItemWhereUniqueInput!]
+  set: [CartItemWhereUniqueInput!]
   disconnect: [CartItemWhereUniqueInput!]
-  delete: [CartItemWhereUniqueInput!]
+  delete: [CartItemWhereUniqueInput]
   update: [CartItemUpdateWithWhereUniqueWithoutUserInput!]
   updateMany: [CartItemUpdateManyWithWhereNestedInput!]
   deleteMany: [CartItemScalarWhereInput!]
@@ -1152,8 +1153,9 @@ input OrderItemUpdateManyDataInput {
 input OrderItemUpdateManyInput {
   create: [OrderItemCreateInput!]
   connect: [OrderItemWhereUniqueInput!]
+  set: [OrderItemWhereUniqueInput!]
   disconnect: [OrderItemWhereUniqueInput!]
-  delete: [OrderItemWhereUniqueInput!]
+  delete: [OrderItemWhereUniqueInput]
   update: [OrderItemUpdateWithWhereUniqueNestedInput!]
   updateMany: [OrderItemUpdateManyWithWhereNestedInput!]
   deleteMany: [OrderItemScalarWhereInput!]
